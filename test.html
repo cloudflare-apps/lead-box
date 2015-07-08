@@ -1,0 +1,18 @@
+<head>
+  <link rel="stylesheet" href="eager-leads.css" />
+</head>
+
+<body style="font-family: Arial">
+  <script>
+    INSTALL_OPTIONS = {
+      "color": "#0099ff"
+    };
+  </script>
+  <script src="eager-leads.js"></script>
+  <script>
+    setTimeout(function(){
+      document.body.querySelector('.eager-leads').classList.add('eager-leads-show');
+      document.body.querySelector('input.eager-leads-input').focus();
+    }, 100);
+  </script>
+</body>

@@ -1,0 +1,27 @@
+{
+  "resources": {
+    "head": [
+      {
+        "type": "style",
+        "src": "eager-leads.css"
+      }
+    ],
+    "body": [
+      {
+        "type": "script",
+        "src": "eager-leads.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "color": {
+        "order": 1,
+        "title": "Accent color",
+        "type": "string",
+        "format": "color",
+        "default": "#0099ff"
+      }
+    }
+  }
+}
