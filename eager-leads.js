@@ -24,16 +24,16 @@
   el.innerHTML = '' +
   '  <div class="eager-leads-close-button"></div>' +
   '  <div class="eager-leads-content">' +
-  '    <div class="eager-leads-header">Join our subscribers</div>' +
-  '    <div class="eager-leads-description">Sign up here and we&#8217;ll keep you in the loop on anything important.</div>' +
-  '    <div class="eager-leads-form">' +
+  '    <div class="eager-leads-header">' + options.headerText + '</div>' +
+  '    <div class="eager-leads-body">' + options.bodyText + '</div>' +
+  '    <form class="eager-leads-form">' +
   '      <div class="eager-leads-field">' +
-  '        <input name="email" class="eager-leads-input" type="text" placeholder="Email address" spellcheck="false">' +
+  '        <input name="email" class="eager-leads-input" type="email" placeholder="Email address" spellcheck="false" required>' +
   '      </div>' +
   '      <div class="eager-leads-actions">' +
-  '        <button class="eager-leads-button">Subscribe now &#8594;</button>' +
+  '        <button type="submit" class="eager-leads-button">' + (options.buttonText || '&nbsp;') + '</button>' +
   '      </div>' +
-  '    </div>' +
+  '    </form>' +
   '  </div>' +
   '  <div class="eager-leads-branding">' +
   '    <a class="eager-leads-branding-link" href="https://eager.io?utm_source=eager_leads_powered_by_link" target="_blank">Powered by Eager</a>' +

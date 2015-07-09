@@ -15,8 +15,28 @@
   },
   "options": {
     "properties": {
-      "color": {
+      "headerText": {
         "order": 1,
+        "title": "Header text",
+        "type": "string",
+        "default": "Join our subscribers"
+      },
+      "bodyText": {
+        "order": 2,
+        "title": "Body text",
+        "type": "string",
+        "format": "textarea",
+        "default": "Sign up here and we’ll keep you in the loop on anything important."
+      },
+      "buttonText": {
+        "order": 3,
+        "title": "Button text",
+        "type": "string",
+        "format": "textarea",
+        "default": "Subscribe now →"
+      },
+      "color": {
+        "order": 4,
         "title": "Accent color",
         "type": "string",
         "format": "color",
