@@ -32,7 +32,6 @@
         "order": 3,
         "title": "Button text",
         "type": "string",
-        "format": "textarea",
         "default": "Subscribe now →"
       },
       "color": {
