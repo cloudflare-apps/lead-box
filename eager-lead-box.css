@@ -1,4 +1,4 @@
-@-webkit-keyframes eager-leads-bounce-in-up {
+@-webkit-keyframes eager-lead-box-bounce-in-up {
   0%, 60%, 75%, 90%, 100% {
     -webkit-animation-timing-function: cubic-bezier(.215, .610, .355, 1);
     animation-timing-function: cubic-bezier(.215, .610, .355, 1);
@@ -34,7 +34,7 @@
   }
 }
 
-@keyframes eager-leads-bounce-in-up {
+@keyframes eager-lead-box-bounce-in-up {
   0%, 60%, 75%, 90%, 100% {
     -webkit-animation-timing-function: cubic-bezier(.215, .610, .355, 1);
     animation-timing-function: cubic-bezier(.215, .610, .355, 1)
@@ -68,7 +68,7 @@
   }
 }
 
-@-webkit-keyframes eager-leads-bounce-out-down {
+@-webkit-keyframes eager-lead-box-bounce-out-down {
   20% {
     -webkit-transform: translate3d(0, 10px, 0);
     transform: translate3d(0, 10px, 0)
@@ -87,7 +87,7 @@
   }
 }
 
-@keyframes eager-leads-bounce-out-down {
+@keyframes eager-lead-box-bounce-out-down {
   20% {
     -webkit-transform: translate3d(0, 10px, 0);
     transform: translate3d(0, 10px, 0)
@@ -106,7 +106,7 @@
   }
 }
 
-.eager-leads {
+.eager-lead-box {
   color: #000;
   font-family: inherit;
   box-sizing: border-box !important;
@@ -118,12 +118,12 @@
   user-select: none
 }
 
-.eager-leads:before, .eager-leads:after, .eager-leads *, .eager-leads *:before, .eager-leads *:after {
+.eager-lead-box:before, .eager-lead-box:after, .eager-lead-box *, .eager-lead-box *:before, .eager-lead-box *:after {
   display: block !important;
   box-sizing: inherit !important
 }
 
-.eager-leads, .eager-leads * {
+.eager-lead-box, .eager-lead-box * {
   font-family: inherit !important;
   font-size: inherit !important;
   text-decoration: none !important;
@@ -133,7 +133,7 @@
   padding: 0 !important
 }
 
-.eager-leads {
+.eager-lead-box {
   position: fixed;
   z-index: 8000;
   bottom: 0;
@@ -151,31 +151,31 @@
 }
 
   @media (max-width: 30em) {
-    .eager-leads {
+    .eager-lead-box {
       width: 100%;
       border-radius: 0
     }
   }
 
   @media (max-width: 15em) {
-    .eager-leads {
+    .eager-lead-box {
       display: none
     }
   }
 
-  .eager-leads.eager-leads-show {
-    -webkit-animation: eager-leads-bounce-in-up 1s ease forwards;
-    animation: eager-leads-bounce-in-up 1s ease forwards
+  .eager-lead-box.eager-lead-box-show {
+    -webkit-animation: eager-lead-box-bounce-in-up 1s ease forwards;
+    animation: eager-lead-box-bounce-in-up 1s ease forwards
   }
 
-  .eager-leads.eager-leads-hide {
+  .eager-lead-box.eager-lead-box-hide {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-animation: eager-leads-bounce-out-down 1s ease forwards;
-    animation: eager-leads-bounce-out-down 1s ease forwards
+    -webkit-animation: eager-lead-box-bounce-out-down 1s ease forwards;
+    animation: eager-lead-box-bounce-out-down 1s ease forwards
   }
 
-  .eager-leads-close-button {
+  .eager-lead-box-close-button {
     cursor: pointer;
     position: absolute;
     z-index: 8005;
@@ -184,7 +184,7 @@
     padding: 1.25em 1.25em .75em 1.25em !important
   }
 
-  .eager-leads-close-button:before {
+  .eager-lead-box-close-button:before {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     content: "\00D7";
     display: block !important;
@@ -198,15 +198,15 @@
     pointer-events: none
   }
 
-  .eager-leads-close-button:hover:before {
+  .eager-lead-box-close-button:hover:before {
     color: rgba(0, 0, 0, .7)
   }
 
-  .eager-leads-content {
+  .eager-lead-box-content {
     margin-bottom: 1em !important
   }
 
-    .eager-leads-header {
+    .eager-lead-box-header {
       font-size: 1.3em !important;
       font-weight: bold;
       opacity: .7;
@@ -215,7 +215,7 @@
       line-height: 1em !important
     }
 
-    .eager-leads-body {
+    .eager-lead-box-body {
       opacity: .7;
       font-size: .9em !important;
       line-height: 1.3em;
@@ -223,11 +223,11 @@
       margin-right: 2.5em !important
     }
 
-    .eager-leads-field {
+    .eager-lead-box-field {
       margin-bottom: 1em !important
     }
 
-    input.eager-leads-input {
+    input.eager-lead-box-input {
       appearance: none;
       font-family: inherit !important;
       width: 100% !important;
@@ -241,31 +241,31 @@
       border-radius: .1875em
     }
 
-    input.eager-leads-input::-webkit-input-placeholder {
+    input.eager-lead-box-input::-webkit-input-placeholder {
       color: rgba(0, 0, 0, .3);
       font-family: inherit;
       font-size 1em
     }
 
-    input.eager-leads-input:-moz-placeholder {
+    input.eager-lead-box-input:-moz-placeholder {
       color: rgba(0, 0, 0, .3);
       font-family: inherit;
       font-size 1em
     }
 
-    input.eager-leads-input::-moz-placeholder {
+    input.eager-lead-box-input::-moz-placeholder {
       color: rgba(0, 0, 0, .3);
       font-family: inherit;
       font-size 1em
     }
 
-    input.eager-leads-input:-ms-input-placeholder {
+    input.eager-lead-box-input:-ms-input-placeholder {
       color: rgba(0, 0, 0, .3);
       font-family: inherit;
       font-size 1em
     }
 
-    button.eager-leads-button {
+    button.eager-lead-box-button {
       position: relative;
       width: 100% !important;
       color: #fff !important;
@@ -275,19 +275,19 @@
       cursor: pointer
     }
 
-    button.eager-leads-button[disabled] {
+    button.eager-lead-box-button[disabled] {
       cursor: not-allowed
     }
 
-    button.eager-leads-button:not([disabled]):hover {
+    button.eager-lead-box-button:not([disabled]):hover {
       opacity: .9
     }
 
-    button.eager-leads-button:not([disabled]):hover:active {
+    button.eager-lead-box-button:not([disabled]):hover:active {
       opacity: .7
     }
 
-    button.eager-leads-button:not([disabled]):focus:before {
+    button.eager-lead-box-button:not([disabled]):focus:before {
       content: "";
       position: absolute;
       top: 2px;
@@ -300,20 +300,20 @@
       transition: opacity .3s ease-in-out
     }
 
-    button.eager-leads-button:not([disabled]):focus:active:before {
+    button.eager-lead-box-button:not([disabled]):focus:active:before {
       opacity: 0
     }
 
-  .eager-leads-branding {
+  .eager-lead-box-branding {
     text-align: center;
     font-size: .75em !important
   }
 
-    a.eager-leads-branding-link {
+    a.eager-lead-box-branding-link {
       color: inherit;
       opacity: .4
     }
 
-      a.eager-leads-branding-link:hover {
+      a.eager-lead-box-branding-link:hover {
         opacity: .8
       }

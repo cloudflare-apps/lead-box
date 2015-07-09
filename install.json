@@ -3,13 +3,13 @@
     "head": [
       {
         "type": "style",
-        "src": "eager-leads.css"
+        "src": "eager-lead-box.css"
       }
     ],
     "body": [
       {
         "type": "script",
-        "src": "eager-leads.js"
+        "src": "eager-lead-box.js"
       }
     ]
   },
