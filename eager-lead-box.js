@@ -24,14 +24,14 @@
   el.innerHTML = '' +
   ' <div class="eager-lead-box-close-button"></div>' +
   ' <div class="eager-lead-box-content">' +
-  '   <div class="eager-lead-box-header">' + options.headerText + '</div>' +
-  '   <div class="eager-lead-box-body">' + options.bodyText + '</div>' +
+  '   <div class="eager-lead-box-header"></div>' +
+  '   <div class="eager-lead-box-body"></div>' +
   '   <form class="eager-lead-box-form">' +
   '     <div class="eager-lead-box-field">' +
   '       <input name="email" class="eager-lead-box-input" type="email" placeholder="Email address" spellcheck="false" required>' +
   '     </div>' +
   '     <div class="eager-lead-box-actions">' +
-  '       <button type="submit" class="eager-lead-box-button">' + (options.buttonText || '&nbsp;') + '</button>' +
+  '       <button type="submit" class="eager-lead-box-button"></button>' +
   '     </div>' +
   '   </form>' +
   ' </div>' +
@@ -39,6 +39,9 @@
   '   <a class="eager-lead-box-branding-link" href="https://eager.io?utm_source=eager_lead_box_powered_by_link" target="_blank">Powered by Eager</a>' +
   ' </div>' +
   '';
+  el.querySelector('.eager-lead-box-header').appendChild(document.createTextNode(options.headerText));
+  el.querySelector('.eager-lead-box-body').appendChild(document.createTextNode(options.bodyText));
+  el.querySelector('.eager-lead-box-button').appendChild(document.createTextNode(options.buttonText || '&nbsp;'));
   document.body.appendChild(el);
 
   show = function() {
