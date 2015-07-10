@@ -3,7 +3,7 @@
     return
   }
 
-  var options, style, el, show, hide, checkScroll;
+  var options, style, el, show, hide, checkScroll, isPreview;
 
   options = INSTALL_OPTIONS;
 
@@ -64,6 +64,11 @@
 
   window.addEventListener('scroll', checkScroll);
   el.querySelector('.eager-lead-box-close-button').addEventListener('click', hide);
+
+  isPreview = window.Eager && window.Eager.installs && window.Eager.installs.preview && window.Eager.installs.preview.appId === 'IgyOK_i5Ib3E';
+  if (isPreview) {
+    setTimeout(show, 500);
+  }
 
   // iOS :hover CSS hack
   el.addEventListener('touchstart', function(){}, false);
