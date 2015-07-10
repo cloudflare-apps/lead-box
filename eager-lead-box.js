@@ -9,35 +9,35 @@
 
   style = document.createElement('style');
   style.innerHTML = '' +
-  '  .eager-lead-box .eager-lead-box-button {' +
-  '    background: ' + options.color + ' !important' +
-  '  }' +
-  '  .eager-lead-box input.eager-lead-box-input:focus {' +
-  '    border-color: ' + options.color + ' !important;' +
-  '    box-shadow: 0 0 .0625em ' + options.color + ' !important' +
-  '  }' +
+  ' .eager-lead-box .eager-lead-box-button {' +
+  '   background: ' + options.color + ' !important' +
+  ' }' +
+  ' .eager-lead-box input.eager-lead-box-input:focus {' +
+  '   border-color: ' + options.color + ' !important;' +
+  '   box-shadow: 0 0 .0625em ' + options.color + ' !important' +
+  ' }' +
   '';
   document.body.appendChild(style);
 
   el = document.createElement('eager-lead-box');
   el.className = 'eager-lead-box';
   el.innerHTML = '' +
-  '  <div class="eager-lead-box-close-button"></div>' +
-  '  <div class="eager-lead-box-content">' +
-  '    <div class="eager-lead-box-header">' + options.headerText + '</div>' +
-  '    <div class="eager-lead-box-body">' + options.bodyText + '</div>' +
-  '    <form class="eager-lead-box-form">' +
-  '      <div class="eager-lead-box-field">' +
-  '        <input name="email" class="eager-lead-box-input" type="email" placeholder="Email address" spellcheck="false" required>' +
-  '      </div>' +
-  '      <div class="eager-lead-box-actions">' +
-  '        <button type="submit" class="eager-lead-box-button">' + (options.buttonText || '&nbsp;') + '</button>' +
-  '      </div>' +
-  '    </form>' +
-  '  </div>' +
-  '  <div class="eager-lead-box-branding">' +
-  '    <a class="eager-lead-box-branding-link" href="https://eager.io?utm_source=eager_lead_box_powered_by_link" target="_blank">Powered by Eager</a>' +
-  '  </div>' +
+  ' <div class="eager-lead-box-close-button"></div>' +
+  ' <div class="eager-lead-box-content">' +
+  '   <div class="eager-lead-box-header">' + options.headerText + '</div>' +
+  '   <div class="eager-lead-box-body">' + options.bodyText + '</div>' +
+  '   <form class="eager-lead-box-form">' +
+  '     <div class="eager-lead-box-field">' +
+  '       <input name="email" class="eager-lead-box-input" type="email" placeholder="Email address" spellcheck="false" required>' +
+  '     </div>' +
+  '     <div class="eager-lead-box-actions">' +
+  '       <button type="submit" class="eager-lead-box-button">' + (options.buttonText || '&nbsp;') + '</button>' +
+  '     </div>' +
+  '   </form>' +
+  ' </div>' +
+  ' <div class="eager-lead-box-branding">' +
+  '   <a class="eager-lead-box-branding-link" href="https://eager.io?utm_source=eager_lead_box_powered_by_link" target="_blank">Powered by Eager</a>' +
+  ' </div>' +
   '';
   document.body.appendChild(el);
 
