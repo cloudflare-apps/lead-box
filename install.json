@@ -34,8 +34,22 @@
         "type": "string",
         "default": "Subscribe now →"
       },
-      "color": {
+      "email": {
         "order": 4,
+        "title": "Email address to send signups to",
+        "description": "Required. e.g. <em>your@email.com</em><br><small>Powered by <a href=\"http://formspree.io\" target=\"_blank\" class=\"with-inherited-color\"><strong>Formspree</strong></a></small>",
+        "type": "string",
+        "default": ""
+      },
+      "successText": {
+        "order": 5,
+        "title": "Thank you text",
+        "description": "This text will display after visitors enter their email.",
+        "type": "string",
+        "default": "Thanks for signing up! :)"
+      },
+      "color": {
+        "order": 6,
         "title": "Accent color",
         "type": "string",
         "format": "color",
