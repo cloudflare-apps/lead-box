@@ -107,8 +107,7 @@
 }
 
 .eager-lead-box {
-  color: #000;
-  font-family: inherit;
+  color: #000 !important;
   box-sizing: border-box !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -116,6 +115,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none
+}
+
+.eager-lead-box * {
+  color: inherit !important
 }
 
 .eager-lead-box:before, .eager-lead-box:after, .eager-lead-box *, .eager-lead-box *:before, .eager-lead-box *:after {
@@ -143,7 +146,7 @@
   max-width: 100%;
   padding: 1.5em 1.5em 6.5em 1.5em !important;
   margin-bottom: -5em !important;
-  background-color: #fff;
+  background: #fff !important;
   border-radius: .3125em 0 0 0;
   box-shadow: 0 0 .0625em rgba(0, 0, 0, .5);
   -webkit-transform: translate3d(0, 100%, 0);
@@ -193,13 +196,13 @@
     height: 1em;
     width: 1em;
     text-align: center;
-    color: rgba(0, 0, 0, .2);
+    color: rgba(0, 0, 0, .2) !important;
     font-weight: 300;
     pointer-events: none
   }
 
   .eager-lead-box-close-button:hover:before {
-    color: rgba(0, 0, 0, .7)
+    color: rgba(0, 0, 0, .7) !important
   }
 
   .eager-lead-box-content {
@@ -233,7 +236,7 @@
       width: 100% !important;
       -webkit-tap-highlight-color: transparent;
       text-rendering: optimizeLegibility;
-      background: #fff;
+      background: #fff !important;
       color: rgba(0, 0, 0, .8) !important;
       border: 1px solid rgba(0, 0, 0, .14) !important;
       border-top-color: rgba(0, 0, 0, .22) !important;
@@ -245,25 +248,25 @@
     }
 
     input.eager-lead-box-input::-webkit-input-placeholder {
-      color: rgba(0, 0, 0, .3);
+      color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
       font-size 1em
     }
 
     input.eager-lead-box-input:-moz-placeholder {
-      color: rgba(0, 0, 0, .3);
+      color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
       font-size 1em
     }
 
     input.eager-lead-box-input::-moz-placeholder {
-      color: rgba(0, 0, 0, .3);
+      color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
       font-size 1em
     }
 
     input.eager-lead-box-input:-ms-input-placeholder {
-      color: rgba(0, 0, 0, .3);
+      color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
       font-size 1em
     }
@@ -313,7 +316,7 @@
   }
 
     a.eager-lead-box-branding-link {
-      color: inherit;
+      color: inherit !important;
       opacity: .4
     }
 
