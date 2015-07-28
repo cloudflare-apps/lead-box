@@ -238,6 +238,9 @@
       border: 1px solid rgba(0, 0, 0, .14) !important;
       border-top-color: rgba(0, 0, 0, .22) !important;
       padding: .6em .8em !important;
+      height: auto !important;
+      box-shadow: none !important;
+      line-height: initial !important;
       border-radius: .1875em
     }
 
