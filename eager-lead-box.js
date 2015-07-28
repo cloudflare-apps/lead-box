@@ -59,7 +59,7 @@
       if (isPreview) {
         form.parentNode.removeChild(form);
         header.innerHTML = options.successText;
-        body.innerHTML = '(Form submissions are simulated during the Eager preview.)'
+        body.innerHTML = '(Form submissions are simulated during the Eager preview.)';
         return;
       }
 
