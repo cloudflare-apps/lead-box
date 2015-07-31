@@ -3,9 +3,11 @@
     return
   }
 
-  var options, style, el, form, show, hide, checkScroll, isPreview;
+  var options, isPreview, style, el, form, show, hide, checkScroll;
 
   options = INSTALL_OPTIONS;
+
+  isPreview = window.Eager && window.Eager.installs && window.Eager.installs.preview && window.Eager.installs.preview.appId === 'IgyOK_i5Ib3E';
 
   style = document.createElement('style');
   style.innerHTML = '' +
@@ -120,12 +122,14 @@
 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       show();
-      window.removeEventListener('scroll', checkScroll);
+
+      if (!isPreview) {
+        window.removeEventListener('scroll', checkScroll);
+      }
     }
   };
   window.addEventListener('scroll', checkScroll);
 
-  isPreview = window.Eager && window.Eager.installs && window.Eager.installs.preview && window.Eager.installs.preview.appId === 'IgyOK_i5Ib3E';
   if (isPreview) {
     show();
   }
