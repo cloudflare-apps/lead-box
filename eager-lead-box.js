@@ -1,5 +1,5 @@
 (function(){
-  if (!document.body.addEventListener || !document.body.setAttribute || !document.body.querySelector || !document.body.classList || !document.body.classList.add) {
+  if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList || !document.documentElement.classList.add) {
     return
   }
 
@@ -17,9 +17,9 @@
   '   box-shadow: 0 0 .0625em ' + options.color + ' !important' +
   ' }' +
   '';
-  document.body.appendChild(style);
 
   el = document.createElement('eager-lead-box');
+  el.addEventListener('touchstart', function(){}, false); // iOS :hover CSS hack
   el.className = 'eager-lead-box';
   el.innerHTML = '' +
   ' <div class="eager-lead-box-close-button"></div>' +
@@ -101,7 +101,6 @@
       xhr.send(params);
     });
   }
-  document.body.appendChild(el);
 
   show = function() {
     el.classList.add('eager-lead-box-show');
@@ -112,22 +111,27 @@
     el.classList.add('eager-lead-box-hide');
     el.classList.remove('eager-lead-box-show');
   };
+  el.querySelector('.eager-lead-box-close-button').addEventListener('click', hide);
 
   checkScroll = function() {
+    if (!document.body) {
+      return;
+    }
+
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       show();
       window.removeEventListener('scroll', checkScroll);
     }
   };
-
   window.addEventListener('scroll', checkScroll);
-  el.querySelector('.eager-lead-box-close-button').addEventListener('click', hide);
 
   isPreview = window.Eager && window.Eager.installs && window.Eager.installs.preview && window.Eager.installs.preview.appId === 'IgyOK_i5Ib3E';
   if (isPreview) {
-    setTimeout(show, 500);
+    show();
   }
 
-  // iOS :hover CSS hack
-  el.addEventListener('touchstart', function(){}, false);
+  document.addEventListener('DOMContentLoaded', function(){
+    document.body.appendChild(style);
+    document.body.appendChild(el);
+  });
 })();
