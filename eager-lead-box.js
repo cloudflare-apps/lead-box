@@ -76,7 +76,7 @@
             } catch (err) {}
           }
           if (jsonResponse && jsonResponse.success === 'confirmation email sent') {
-            body.innerHTML = 'Formspree has sent an email to ' + options.signupEmail + ' for verification.';
+            body.innerHTML = 'Formspree has sent an email to ' + options.email + ' for verification.';
           } else {
             body.parentNode.removeChild(body);
             header.innerHTML = options.successText;
