@@ -106,7 +106,6 @@
   show = function() {
     el.classList.add('eager-lead-box-show');
     el.classList.remove('eager-lead-box-hide');
-    el.querySelector('input.eager-lead-box-input').focus();
   };
 
   hide = function() {
