@@ -52,8 +52,8 @@
 
       var header, body, button, url, xhr, callback, params;
 
-      header = el.querySelector('.eager-lead-box-header')
-      body = el.querySelector('.eager-lead-box-body')
+      header = el.querySelector('.eager-lead-box-header');
+      body = el.querySelector('.eager-lead-box-body');
       button = el.querySelector('button[type="submit"]');
       url = form.action;
       xhr = new XMLHttpRequest();

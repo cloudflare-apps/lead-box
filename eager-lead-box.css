@@ -250,25 +250,25 @@
     input.eager-lead-box-input::-webkit-input-placeholder {
       color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
-      font-size 1em
+      font-size: 1em
     }
 
     input.eager-lead-box-input:-moz-placeholder {
       color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
-      font-size 1em
+      font-size: 1em
     }
 
     input.eager-lead-box-input::-moz-placeholder {
       color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
-      font-size 1em
+      font-size: 1em
     }
 
     input.eager-lead-box-input:-ms-input-placeholder {
       color: rgba(0, 0, 0, .3) !important;
       font-family: inherit;
-      font-size 1em
+      font-size: 1em
     }
 
     button.eager-lead-box-button {
