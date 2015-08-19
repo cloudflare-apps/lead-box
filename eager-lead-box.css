@@ -276,6 +276,7 @@
       width: 100% !important;
       color: #fff !important;
       padding: .9em !important;
+      height: auto !important;
       border-radius: .1875em;
       font-weight: bold;
       cursor: pointer
