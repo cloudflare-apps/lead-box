@@ -3,7 +3,7 @@
     return
   }
 
-  var options, isPreview, style, el, form, show, hide, checkScroll;
+  var options, isPreview, style, el, form, show, hide, checkScroll, submitFormspree, submitMailchimp, submitConstantContact;
 
   options = INSTALL_OPTIONS;
 
@@ -44,65 +44,132 @@
   el.querySelector('.eager-lead-box-header').appendChild(document.createTextNode(options.headerText));
   el.querySelector('.eager-lead-box-body').appendChild(document.createTextNode(options.bodyText));
   el.querySelector('.eager-lead-box-button').appendChild(document.createTextNode(options.buttonText || '&nbsp;'));
-  if (options.email) {
-    form = el.querySelector('.eager-lead-box-form');
-    form.action = '//formspree.io/' + options.email;
-    form.addEventListener('submit', function(event){
-      event.preventDefault();
 
-      var header, body, button, url, xhr, callback, params;
+  submitFormspree = function(email, cb){
+    var url = '//formspree.io/' + options.email;
+    var xhr = new XMLHttpRequest();
 
-      header = el.querySelector('.eager-lead-box-header');
-      body = el.querySelector('.eager-lead-box-body');
-      button = el.querySelector('button[type="submit"]');
-      url = form.action;
-      xhr = new XMLHttpRequest();
+    var params = 'email=' + encodeURIComponent(email);
 
-      if (isPreview) {
-        form.parentNode.removeChild(form);
-        header.innerHTML = options.successText;
-        body.innerHTML = '(Form submissions are simulated during the Eager preview.)';
-        return;
-      }
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = function(){
+      var jsonResponse = {};
+      if (xhr.status < 400) {
+        try {
+          jsonResponse = JSON.parse(xhr.response);
+        } catch (err) {}
 
-      callback = function(xhr) {
-        var jsonResponse = {};
-
-        button.removeAttribute('disabled');
-
-        if (xhr && xhr.target && xhr.target.status === 200) {
-          form.parentNode.removeChild(form);
-          if (xhr.target.response) {
-            try {
-              jsonResponse = JSON.parse(xhr.target.response);
-            } catch (err) {}
-          }
-          if (jsonResponse && jsonResponse.success === 'confirmation email sent') {
-            body.innerHTML = 'Formspree has sent an email to ' + options.email + ' for verification.';
-          } else {
-            body.parentNode.removeChild(body);
-            header.innerHTML = options.successText;
-          }
-          setTimeout(hide, 3000);
+        if (jsonResponse && jsonResponse.success === 'confirmation email sent') {
+          cb('Formspree has sent an email to ' + options.email + ' for verification.');
         } else {
-          body.innerHTML = 'Whoops, something didn’t work. Please try again.';
+          cb(true);
         }
-      };
-
-      params = 'email=' + encodeURIComponent(el.querySelector('input[type="email"]').value);
-
-      if (!url) {
-        return;
+      } else {
+        cb(false);
       }
+    }
 
-      button.setAttribute('disabled', 'disabled');
-      xhr.open('POST', url);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.onload = callback.bind(xhr);
-      xhr.send(params);
-    });
+    xhr.send(params);
   }
+
+  submitMailchimp = function(email, cb){
+    var cbCode = "eagerFormCallback" + Math.floor(Math.random() * 100000000000000);
+    window[cbCode] = function(resp){
+      cb(resp && resp.result === "success");
+
+      delete window[cbCode];
+    }
+
+    var url = options.list;
+    if (!url){
+      return cb(false);
+    }
+
+    url = url.replace('http', 'https');
+    url = url.replace(/list-manage[0-9]+\.com/, 'list-manage.com');
+    url = url.replace('?', '/post-json?');
+    url = url + "&EMAIL=" + encodeURIComponent(email);
+    url = url + "&c=" + cbCode;
+
+    var script = document.createElement('script');
+    script.src = url;
+    document.head.appendChild(script);
+  }
+
+  submitConstantContact = function(email, cb){
+    if (!options.form || !options.form.listId){
+      return cb(false);
+    }
+
+    var xhr = new XMLHttpRequest();
+
+    var body = {
+      email: email,
+      ca: options.form.campaignActivity,
+      list: options.form.listId
+    };
+
+    xhr.open('POST', 'https://visitor2.constantcontact.com/api/signup');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = function(){
+      cb(xhr && xhr.status < 400);
+    }
+
+    xhr.send(JSON.stringify(body));
+  }
+
+  form = el.querySelector('.eager-lead-box-form');
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    var header, body, button, email, callback;
+
+    header = el.querySelector('.eager-lead-box-header');
+    body = el.querySelector('.eager-lead-box-body');
+    button = el.querySelector('button[type="submit"]');
+    email = el.querySelector('input[type="email"]').value;
+
+    if (isPreview) {
+      form.parentNode.removeChild(form);
+      header.innerHTML = options.successText;
+      body.innerHTML = '(Form submissions are simulated during the Eager preview.)';
+      return;
+    }
+
+    callback = function(ok) {
+      button.removeAttribute('disabled');
+
+      if (ok) {
+        form.parentNode.removeChild(form);
+
+        if (typeof ok == 'string') {
+          body.innerHTML = ok;
+        } else {
+          body.parentNode.removeChild(body);
+          header.innerHTML = options.successText;
+        }
+
+        setTimeout(hide, 3000);
+      } else {
+        body.innerHTML = 'Whoops, something didn’t work. Please try again.';
+      }
+    };
+
+    if (options.destination == "email" && options.email){
+      submitFormspree(email, callback);
+    } else if (options.destination == "service"){
+      if (options.account.service == "mailchimp"){
+        submitMailchimp(email, callback);
+      } else if (options.account.service == "constant-contact"){
+        submitConstantContact(email, callback);
+      }
+    }
+
+    button.setAttribute('disabled', 'disabled');
+  });
 
   show = function() {
     el.classList.add('eager-lead-box-show');
