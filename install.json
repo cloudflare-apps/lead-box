@@ -13,46 +13,103 @@
   },
   "options": {
     "properties": {
-      "headerText": {
+      "destination": {
         "order": 1,
+        "title": "Destination",
+        "description": "Would you like to be emailed new signups or would you like them to be added to your mail service?",
+        "type": "string",
+        "format": "radios",
+        "enum": [
+          "email",
+          "service"
+        ],
+        "enumNames": {
+          "email": "Email me new subscribers",
+          "service": "Add new subscribers to my Mailchimp or Constant Contact mailing list"
+        }
+      },
+      "email": {
+        "order": 2,
+        "title": "Email address to send signups to",
+        "description": "Required. e.g. <em>your@email.com</em><br><small>Powered by <a href=\"http://formspree.io\" target=\"_blank\" class=\"with-inherited-color\"><strong>Formspree</strong></a></small>",
+        "type": "string",
+        "default": "",
+        "showIf": {
+          "destination": "email"
+        }
+      },
+      "account": {
+        "order": 3,
+        "title": "Mailing List Service",
+        "description": "Select the mailing service account which you would like to send subscriptions to:",
+        "type": "object",
+        "format": "account",
+        "services": ["mailchimp", "constant-contact"],
+        "showIf": {
+          "destination": "service"
+        }
+      },
+      "headerText": {
+        "order": 101,
         "title": "Header text",
         "type": "string",
         "default": "Join our subscribers"
       },
       "bodyText": {
-        "order": 2,
+        "order": 102,
         "title": "Body text",
         "type": "string",
         "format": "textarea",
         "default": "Sign up here and we’ll keep you in the loop on anything important."
       },
       "buttonText": {
-        "order": 3,
+        "order": 103,
         "title": "Button text",
         "type": "string",
         "default": "Subscribe now →"
       },
-      "email": {
-        "order": 4,
-        "title": "Email address to send signups to",
-        "description": "Required. e.g. <em>your@email.com</em><br><small>Powered by <a href=\"http://formspree.io\" target=\"_blank\" class=\"with-inherited-color\"><strong>Formspree</strong></a></small>",
-        "type": "string",
-        "default": ""
-      },
       "successText": {
-        "order": 5,
+        "order": 104,
         "title": "Thank you text",
         "description": "This text will display after visitors enter their email.",
         "type": "string",
         "default": "Thanks for signing up! :)"
       },
       "color": {
-        "order": 6,
+        "order": 105,
         "title": "Accent color",
         "type": "string",
         "format": "color",
         "default": "#0099ff"
       }
     }
-  }
+  },
+  "hooks": [
+    {
+      "endpoint": "http://provisioner.eager.io/{{ install.options.account.service }}/hook",
+      "events": ["option-change:account", "preview"],
+      "block": true,
+      "if": "install.options.destination == 'service' && install.options.account && install.options.account.service",
+      "authenticate": ["account"],
+      "failure": {
+        "action": "notify",
+        "message": "There was an error communicating with the mail service."
+      }
+    },
+    {
+      "endpoint": "http://provisioner.eager.io/constant-contact/hook",
+      "events": ["option-change:list"],
+      "block": true,
+      "if": "install.options.destination == 'service' && install.options.account && install.options.account.service == 'constant-contact'",
+      "authenticate": ["account"],
+      "failure": {
+        "action": "notify",
+        "message": "There was an error communicating with Constant Contact."
+      }
+    },
+    {
+      "events": ["account-logout"],
+      "action": "reset-schema"
+    }
+  ]
 }
