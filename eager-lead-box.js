@@ -45,16 +45,18 @@
   el.querySelector('.eager-lead-box-body').appendChild(document.createTextNode(options.bodyText));
   el.querySelector('.eager-lead-box-button').appendChild(document.createTextNode(options.buttonText || '&nbsp;'));
 
-  submitFormspree = function(email, cb){
-    var url = '//formspree.io/' + options.email;
-    var xhr = new XMLHttpRequest();
+  submitFormspree = function(email, cb) {
+    var url, xhr, params;
 
-    var params = 'email=' + encodeURIComponent(email);
+    url = '//formspree.io/' + options.email;
+    xhr = new XMLHttpRequest();
+
+    params = 'email=' + encodeURIComponent(email);
 
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function(){
+    xhr.onload = function() {
       var jsonResponse = {};
       if (xhr.status < 400) {
         try {
@@ -72,40 +74,45 @@
     }
 
     xhr.send(params);
-  }
+  };
 
-  submitMailchimp = function(email, cb){
-    var cbCode = "eagerFormCallback" + Math.floor(Math.random() * 100000000000000);
-    window[cbCode] = function(resp){
-      cb(resp && resp.result === "success");
+  submitMailchimp = function(email, cb) {
+    var cbCode, url, script;
+
+    cbCode = 'eagerFormCallback' + Math.floor(Math.random() * 100000000000000);
+
+    window[cbCode] = function(resp) {
+      cb(resp && resp.result === 'success');
 
       delete window[cbCode];
     }
 
-    var url = options.list;
-    if (!url){
+    url = options.list;
+    if (!url) {
       return cb(false);
     }
 
     url = url.replace('http', 'https');
     url = url.replace(/list-manage[0-9]+\.com/, 'list-manage.com');
     url = url.replace('?', '/post-json?');
-    url = url + "&EMAIL=" + encodeURIComponent(email);
-    url = url + "&c=" + cbCode;
+    url = url + '&EMAIL=' + encodeURIComponent(email);
+    url = url + '&c=' + cbCode;
 
-    var script = document.createElement('script');
+    script = document.createElement('script');
     script.src = url;
     document.head.appendChild(script);
-  }
+  };
 
-  submitConstantContact = function(email, cb){
-    if (!options.form || !options.form.listId){
+  submitConstantContact = function(email, cb) {
+    if (!options.form || !options.form.listId) {
       return cb(false);
     }
 
-    var xhr = new XMLHttpRequest();
+    var xhr, body;
 
-    var body = {
+    xhr = new XMLHttpRequest();
+
+    body = {
       email: email,
       ca: options.form.campaignActivity,
       list: options.form.listId
@@ -114,12 +121,12 @@
     xhr.open('POST', 'https://visitor2.constantcontact.com/api/signup');
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function(){
+    xhr.onload = function() {
       cb(xhr && xhr.status < 400);
-    }
+    };
 
     xhr.send(JSON.stringify(body));
-  }
+  };
 
   form = el.querySelector('.eager-lead-box-form');
   form.addEventListener('submit', function(event){
@@ -158,12 +165,12 @@
       }
     };
 
-    if (options.destination == "email" && options.email){
+    if (options.destination == 'email' && options.email) {
       submitFormspree(email, callback);
-    } else if (options.destination == "service"){
-      if (options.account.service == "mailchimp"){
+    } else if (options.destination == 'service') {
+      if (options.account.service == 'mailchimp') {
         submitMailchimp(email, callback);
-      } else if (options.account.service == "constant-contact"){
+      } else if (options.account.service == 'constant-contact') {
         submitConstantContact(email, callback);
       }
     }
