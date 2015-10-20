@@ -15,8 +15,7 @@
     "properties": {
       "destination": {
         "order": 1,
-        "title": "Destination",
-        "description": "Would you like to be emailed new signups or would you like them to be added to your mail service?",
+        "title": "When a visitor submits the LeadBox form...",
         "type": "string",
         "format": "radios",
         "enum": [
@@ -24,15 +23,16 @@
           "service"
         ],
         "enumNames": {
-          "email": "Email me new subscribers",
-          "service": "Add new subscribers to my Mailchimp or Constant Contact mailing list"
+          "email": "Email me the information they submitted.<span class=\"help-text\"><small>Powered by <a href=\"http://formspree.io\" target=\"_blank\" class=\"with-inherited-color\"><strong>Formspree</strong></a></small></span>",
+          "service": "Add them as contacts to the mailing list service of my choice.<span class=\"help-text\"><small>Currently, <a href=\"http://www.constantcontact.com\" target=\"_blank\" class=\"with-inherited-color\"><strong>Constant Contact</strong></a> and <a href=\"http://mailchimp.com\" target=\"_blank\" class=\"with-inherited-color\"><strong>Mailchimp</strong></a> are supported.</small></span>"
         }
       },
       "email": {
         "order": 2,
         "title": "Email address to send signups to",
-        "description": "Required. e.g. <em>your@email.com</em><br><small>Powered by <a href=\"http://formspree.io\" target=\"_blank\" class=\"with-inherited-color\"><strong>Formspree</strong></a></small>",
+        "description": "This field is required for LeadBox to work.",
         "type": "string",
+        "placeholder": "your@email.com",
         "default": "",
         "showIf": {
           "destination": "email"
@@ -40,8 +40,8 @@
       },
       "account": {
         "order": 3,
-        "title": "Mailing List Service",
-        "description": "Select the mailing service account which you would like to send subscriptions to:",
+        "title": "Mailing list service",
+        "description": "Select the mailing list service which you would like to send subscriptions to.",
         "type": "object",
         "format": "account",
         "services": ["mailchimp", "constant-contact"],
@@ -53,6 +53,7 @@
         "order": 101,
         "title": "Header text",
         "type": "string",
+        "placeholder": "Join our subscribers",
         "default": "Join our subscribers"
       },
       "bodyText": {
@@ -60,12 +61,14 @@
         "title": "Body text",
         "type": "string",
         "format": "textarea",
+        "placeholder": "Sign up here and we’ll keep you in the loop on anything important.",
         "default": "Sign up here and we’ll keep you in the loop on anything important."
       },
       "buttonText": {
         "order": 103,
         "title": "Button text",
         "type": "string",
+        "placeholder": "Subscribe now →",
         "default": "Subscribe now →"
       },
       "successText": {
@@ -73,6 +76,7 @@
         "title": "Thank you text",
         "description": "This text will display after visitors enter their email.",
         "type": "string",
+        "placeholder": "Thanks for signing up! :)",
         "default": "Thanks for signing up! :)"
       },
       "color": {
@@ -80,6 +84,7 @@
         "title": "Accent color",
         "type": "string",
         "format": "color",
+        "placeholder": "#0099ff",
         "default": "#0099ff"
       }
     }
