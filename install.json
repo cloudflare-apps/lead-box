@@ -49,15 +49,29 @@
           "destination": "service"
         }
       },
+      "list": {
+        "order": 4,
+        "title": "List",
+        "description": "Select the list in your account which email submissions should be added to",
+        "type": "string",
+        "default": "",
+        "enum": [""],
+        "enumNames": {
+          "": "Login to your account above to select a list"
+        },
+        "showIf": {
+          "destination": "service"
+        }
+      },
       "headerText": {
-        "order": 101,
+        "order": 5,
         "title": "Header text",
         "type": "string",
         "placeholder": "Join our subscribers",
         "default": "Join our subscribers"
       },
       "bodyText": {
-        "order": 102,
+        "order": 6,
         "title": "Body text",
         "type": "string",
         "format": "textarea",
@@ -65,14 +79,14 @@
         "default": "Sign up here and we’ll keep you in the loop on anything important."
       },
       "buttonText": {
-        "order": 103,
+        "order": 7,
         "title": "Button text",
         "type": "string",
         "placeholder": "Subscribe now →",
         "default": "Subscribe now →"
       },
       "successText": {
-        "order": 104,
+        "order": 8,
         "title": "Thank you text",
         "description": "This text will display after visitors enter their email.",
         "type": "string",
@@ -80,7 +94,7 @@
         "default": "Thanks for signing up! :)"
       },
       "color": {
-        "order": 105,
+        "order": 9,
         "title": "Accent color",
         "type": "string",
         "format": "color",
