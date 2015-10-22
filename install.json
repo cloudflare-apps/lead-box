@@ -57,10 +57,14 @@
         "default": "",
         "enum": [""],
         "enumNames": {
-          "": "Login to your account above to select a list"
+          "": "Loading lists..."
         },
         "showIf": {
-          "destination": "service"
+          "destination": "service",
+          "account.service": {
+            "op": "!=",
+            "value": null
+          }
         }
       },
       "headerText": {
