@@ -7,7 +7,7 @@
       },
       {
         "type": "script",
-        "src": "eager-lead-box.js"
+        "src": "build/eager-lead-box.js"
       }
     ]
   },

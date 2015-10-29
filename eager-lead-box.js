@@ -1,13 +1,14 @@
+import {submit} from 'email-utils/utils.js';
+
 (function(){
   if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList || !document.documentElement.classList.add) {
     return
   }
 
-  var options, isPreview, style, el, form, show, hide, checkScroll, submitFormspree, submitMailchimp, submitConstantContact;
+  var options, isPreview, style, el, form, show, hide, checkScroll;
 
   options = INSTALL_OPTIONS;
-
-  isPreview = window.Eager && window.Eager.installs && window.Eager.installs.preview && window.Eager.installs.preview.appId === 'IgyOK_i5Ib3E';
+  isPreview = INSTALL_ID == 'preview';
 
   style = document.createElement('style');
   style.innerHTML = '' +
@@ -45,88 +46,6 @@
   el.querySelector('.eager-lead-box-body').appendChild(document.createTextNode(options.bodyText));
   el.querySelector('.eager-lead-box-button').appendChild(document.createTextNode(options.buttonText || '&nbsp;'));
 
-  submitFormspree = function(email, cb) {
-    var url, xhr, params;
-
-    url = '//formspree.io/' + options.email;
-    xhr = new XMLHttpRequest();
-
-    params = 'email=' + encodeURIComponent(email);
-
-    xhr.open('POST', url);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function() {
-      var jsonResponse = {};
-      if (xhr.status < 400) {
-        try {
-          jsonResponse = JSON.parse(xhr.response);
-        } catch (err) {}
-
-        if (jsonResponse && jsonResponse.success === 'confirmation email sent') {
-          cb('Formspree has sent an email to ' + options.email + ' for verification.');
-        } else {
-          cb(true);
-        }
-      } else {
-        cb(false);
-      }
-    }
-
-    xhr.send(params);
-  };
-
-  submitMailchimp = function(email, cb) {
-    var cbCode, url, script;
-
-    cbCode = 'eagerFormCallback' + Math.floor(Math.random() * 100000000000000);
-
-    window[cbCode] = function(resp) {
-      cb(resp && resp.result === 'success');
-
-      delete window[cbCode];
-    }
-
-    url = options.list;
-    if (!url) {
-      return cb(false);
-    }
-
-    url = url.replace('http', 'https');
-    url = url.replace(/list-manage[0-9]+\.com/, 'list-manage.com');
-    url = url.replace('?', '/post-json?');
-    url = url + '&EMAIL=' + encodeURIComponent(email);
-    url = url + '&c=' + cbCode;
-
-    script = document.createElement('script');
-    script.src = url;
-    document.head.appendChild(script);
-  };
-
-  submitConstantContact = function(email, cb) {
-    if (!options.form || !options.form.listId) {
-      return cb(false);
-    }
-
-    var xhr, body;
-
-    xhr = new XMLHttpRequest();
-
-    body = {
-      email: email,
-      ca: options.form.campaignActivity,
-      list: options.form.listId
-    };
-
-    xhr.open('POST', 'https://visitor2.constantcontact.com/api/signup');
-    xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function() {
-      cb(xhr && xhr.status < 400);
-    };
-
-    xhr.send(JSON.stringify(body));
-  };
 
   form = el.querySelector('.eager-lead-box-form');
   form.addEventListener('submit', function(event){
@@ -165,15 +84,7 @@
       }
     };
 
-    if (options.destination == 'email' && options.email) {
-      submitFormspree(email, callback);
-    } else if (options.destination == 'service') {
-      if (options.account.service == 'mailchimp') {
-        submitMailchimp(email, callback);
-      } else if (options.account.service == 'constant-contact') {
-        submitConstantContact(email, callback);
-      }
-    }
+    submit(options, email, callback);
 
     button.setAttribute('disabled', 'disabled');
   });
