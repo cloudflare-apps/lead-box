@@ -1,25 +1,29 @@
 import {submit} from 'email-utils/utils.js';
 
 (function(){
-  if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList || !document.documentElement.classList.add) {
+  if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList) {
     return
   }
 
-  var options, isPreview, style, el, form, show, hide, checkScroll;
+  var options, isPreview, style, el, form, show, hide, checkScroll, updateStyle, updateCopy, update, setOptions;
 
   options = INSTALL_OPTIONS;
   isPreview = INSTALL_ID == 'preview';
 
   style = document.createElement('style');
-  style.innerHTML = '' +
-  ' .eager-lead-box .eager-lead-box-button {' +
-  '   background: ' + options.color + ' !important' +
-  ' }' +
-  ' .eager-lead-box input.eager-lead-box-input:focus {' +
-  '   border-color: ' + options.color + ' !important;' +
-  '   box-shadow: 0 0 .0625em ' + options.color + ' !important' +
-  ' }' +
-  '';
+  document.head.appendChild(style);
+
+  updateStyle = function() {
+    style.innerHTML = '' +
+    ' .eager-lead-box .eager-lead-box-button {' +
+    '   background: ' + options.color + ' !important' +
+    ' }' +
+    ' .eager-lead-box input.eager-lead-box-input:focus {' +
+    '   border-color: ' + options.color + ' !important;' +
+    '   box-shadow: 0 0 .0625em ' + options.color + ' !important' +
+    ' }' +
+    '';
+  };
 
   el = document.createElement('eager-lead-box');
   el.addEventListener('touchstart', function(){}, false); // iOS :hover CSS hack
@@ -42,10 +46,33 @@ import {submit} from 'email-utils/utils.js';
   '   <a class="eager-lead-box-branding-link" href="https://eager.io?utm_source=eager_lead_box_powered_by_link" target="_blank">Powered by Eager</a>' +
   ' </div>' +
   '';
-  el.querySelector('.eager-lead-box-header').appendChild(document.createTextNode(options.headerText));
-  el.querySelector('.eager-lead-box-body').appendChild(document.createTextNode(options.bodyText));
-  el.querySelector('.eager-lead-box-button').appendChild(document.createTextNode(options.buttonText || '&nbsp;'));
 
+  updateCopy = function() {
+    el.querySelector('.eager-lead-box-header').innerHTML = options.headerText;
+    el.querySelector('.eager-lead-box-body').innerHTML = options.bodyText;
+    el.querySelector('.eager-lead-box-button').innerHTML = options.buttonText || '&nbsp;';
+  };
+
+  update = function() {
+    if (!document.body){
+      return;
+    }
+
+    if (!form.parentNode){
+      el.querySelector('.eager-lead-box-content').appendChild(form);
+    }
+
+    el.querySelector('button[type="submit"]').removeAttribute('disabled');
+
+    updateCopy();
+    updateStyle();
+  };
+
+  setOptions = function(opts) {
+    options = opts;
+
+    update();
+  };
 
   form = el.querySelector('.eager-lead-box-form');
   form.addEventListener('submit', function(event){
@@ -120,7 +147,14 @@ import {submit} from 'email-utils/utils.js';
   }
 
   document.addEventListener('DOMContentLoaded', function(){
-    document.body.appendChild(style);
     document.body.appendChild(el);
+
+    update();
   });
+
+  window.EagerLeadBox = {
+    setOptions: setOptions,
+    hide: hide,
+    show: show
+  };
 })();
