@@ -2,17 +2,17 @@
     "use strict";
     function email$utils$utils$$submit(options, email, callback) {
       if (options.destination == 'email' && options.email) {
-        email$utils$utils$$submitFormspree(email, callback);
+        email$utils$utils$$submitFormspree(options, email, callback);
       } else if (options.destination == 'service') {
         if (options.account.service == 'mailchimp') {
-          email$utils$utils$$submitMailchimp(email, callback);
+          email$utils$utils$$submitMailchimp(options, email, callback);
         } else if (options.account.service == 'constant-contact') {
-          email$utils$utils$$submitConstantContact(email, callback);
+          email$utils$utils$$submitConstantContact(options, email, callback);
         }
       }
     }
 
-    function email$utils$utils$$submitFormspree(email, cb) {
+    function email$utils$utils$$submitFormspree(options, email, cb) {
       var url, xhr, params;
 
       url = '//formspree.io/' + options.email;
@@ -41,7 +41,7 @@
       }
 
       xhr.send(params);
-    }function email$utils$utils$$submitMailchimp(email, cb) {
+    }function email$utils$utils$$submitMailchimp(options, email, cb) {
       var cbCode, url, script;
 
       cbCode = 'eagerFormCallback' + Math.floor(Math.random() * 100000000000000);
@@ -66,7 +66,7 @@
       script = document.createElement('script');
       script.src = url;
       document.head.appendChild(script);
-    }function email$utils$utils$$submitConstantContact(email, cb) {
+    }function email$utils$utils$$submitConstantContact(options, email, cb) {
       if (!options.form || !options.form.listId) {
         return cb(false);
       }
