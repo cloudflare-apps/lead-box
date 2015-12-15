@@ -148,9 +148,9 @@ import {submit} from 'email-utils/utils.js';
   if (isPreview) {
     show();
   } else if (!window.localStorage.eagerLeadBoxClosed || window.localStorage.eagerLeadBoxClosed !== JSON.stringify(options)) {
-      window.addEventListener('scroll', checkScroll);
-    }
+    window.addEventListener('scroll', checkScroll);
   }
+
   document.addEventListener('DOMContentLoaded', function(){
     document.body.appendChild(el);
 
