@@ -1,7 +1,7 @@
 import {submit} from 'email-utils/utils.js';
 
 (function(){
-  if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList) {
+  if (!window.addEventListener || !document.documentElement.setAttribute || !document.querySelector || !document.documentElement.classList || !window.localStorage) {
     return
   }
 
@@ -124,6 +124,10 @@ import {submit} from 'email-utils/utils.js';
   hide = function() {
     el.classList.add('eager-lead-box-hide');
     el.classList.remove('eager-lead-box-show');
+
+    if (!isPreview) {
+      window.localStorage.eagerLeadBoxClosed = JSON.stringify(options);
+    }
   };
   el.querySelector('.eager-lead-box-close-button').addEventListener('click', hide);
 
@@ -140,12 +144,13 @@ import {submit} from 'email-utils/utils.js';
       }
     }
   };
-  window.addEventListener('scroll', checkScroll);
 
   if (isPreview) {
     show();
+  } else if (!window.localStorage.eagerLeadBoxClosed || window.localStorage.eagerLeadBoxClosed !== JSON.stringify(options)) {
+      window.addEventListener('scroll', checkScroll);
+    }
   }
-
   document.addEventListener('DOMContentLoaded', function(){
     document.body.appendChild(el);
 
