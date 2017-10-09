@@ -1,0 +1,294 @@
+cloudflare-app[app="lead-box"],
+cloudflare-app[app="lead-box"] * {
+  box-sizing: border-box;
+}
+
+cloudflare-app[app="lead-box"] {
+  display: none;
+  font-size: 12px;
+  position: fixed;
+  z-index: 10000;
+}
+
+cloudflare-app[app="lead-box"].cf-invalid cf-dialog-content-title,
+cloudflare-app[app="lead-box"].cf-invalid cf-dialog-close-button,
+cloudflare-app[app="lead-box"].cf-invalid cf-signup-text,
+cloudflare-app[app="lead-box"].cf-invalid input[type="submit"] {
+  filter: blur(2px);
+}
+
+cloudflare-app[app="lead-box"][data-visibility="visible"] {
+  display: block;
+}
+
+cloudflare-app[app="lead-box"][data-goal="signupSuccess"] {
+  text-align: left;
+}
+
+cloudflare-app[app="lead-box"][data-goal="signupSuccess"] cf-dialog-content-text {
+  display: flex;
+  flex-flow: column;
+  justify-content: left;
+}
+
+cloudflare-app[app="lead-box"][data-goal="signupSuccess"] cf-signup-text {
+  display: block;
+}
+
+cloudflare-app[app="lead-box"][data-form="submitting"] cf-dialog,
+cloudflare-app[app="lead-box"][data-goal="submitting"] input[type="submit"] {
+  cursor: wait;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog {
+  cursor: default;
+  display: block;
+  z-index: 20005;
+}
+
+cloudflare-app[app="lead-box"] .cf-branding,
+cloudflare-app[app="lead-box"] .cf-branding:active,
+cloudflare-app[app="lead-box"] .cf-branding:visited {
+  color: #111 !important;
+  text-decoration: none !important;
+  text-indent: 0 !important;
+  padding: 0 !important;
+  font-size: .85em !important;
+  flex: 1 0 auto !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  align-items: baseline !important;
+}
+
+cloudflare-app[app="lead-box"] .cf-branding:hover {
+  color: #111 !important;
+  text-decoration: none !important;
+}
+
+cloudflare-app[app="lead-box"] .cf-branding::before {
+  content: "Powered by";
+  margin-right: .5em;
+  font-weight: 300;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+cloudflare-app[app="lead-box"] .cf-branding > svg {
+  height: .7em;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  cloudflare-app[app="lead-box"] {
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  cloudflare-app[app="lead-box"] cf-dialog-content {
+    border-top: 1px solid #dcdcdc;
+  }
+
+  cloudflare-app[app="lead-box"] .cf-branding {
+    justify-content: center !important;
+  }
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content {
+  display: block;
+  background: #fff;
+  color: #333;
+  line-height: 1.65;
+  max-width: 100%;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  cloudflare-app[app="lead-box"] cf-dialog {
+    padding: 1em;
+  }
+
+  cloudflare-app[app="lead-box"] cf-dialog-content {
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 5px 20px rgba(0, 0, 0, .1);
+    width: 32em;
+  }
+
+  cloudflare-app[app="lead-box"][data-position~="top"] {
+    top: 0;
+  }
+
+  cloudflare-app[app="lead-box"][data-position~="bottom"] {
+    bottom: 0;
+  }
+
+  cloudflare-app[app="lead-box"][data-position~="left"] {
+    left: 0;
+  }
+
+  cloudflare-app[app="lead-box"][data-position~="right"] {
+    right: 0;
+  }
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content,
+cloudflare-app[app="lead-box"] cf-dialog-content * {
+  font-family: inherit;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text,
+cloudflare-app[app="lead-box"] input[type="email"] {
+  color: inherit;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text {
+  display: block;
+  padding: 1em;
+  -webkit-font-smoothing: antialiased;
+}
+
+cloudflare-app[app="lead-box"] cf-signup-text {
+  display: block;
+  opacity: .8;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  cloudflare-app[app="lead-box"] cf-dialog-content-text {
+    padding: 1em;
+  }
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text > * {
+  text-indent: 0;
+  margin: 1em 0;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text > *:first-child {
+  margin-top: 0;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-text > *:last-child {
+  margin-bottom: 0;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-content-title {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1.3;
+  margin: 0;
+  padding-right: 2em;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-close-button {
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  position: absolute;
+  font-size: 1.25em;
+  height: 2em;
+  line-height: 2;
+  right: .4em;
+  top: .4em;
+  width: 2em;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  z-index: 20007;
+  border-radius: 3px;
+  color: rgba(0, 0, 0, .8);
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-close-button:hover {
+  background: rgba(0, 0, 0, .1);
+  color: #000;
+}
+
+cloudflare-app[app="lead-box"] cf-dialog-close-button::after {
+  content: "✕";
+  display: block;
+}
+
+cloudflare-app[app="lead-box"] input[type="submit"] {
+  border-radius: 0.1875em;
+  border: 1px solid transparent;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  flex: 0 0 auto;
+  margin-left: 1em;
+  max-width: 16em;
+  overflow: hidden;
+  padding: .6em 1em;
+  height: 2.8em;
+  line-height: 1;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: auto;
+}
+
+cloudflare-app[app="lead-box"] input[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+cloudflare-app[app="lead-box"] input[type="email"] {
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  background: #fff;
+  color: inherit;
+  border: 1px solid rgba(0, 0, 0, .18);
+  border-top-color: rgba(0, 0, 0, .24);
+  padding: .6em 1em;
+  height: 2.8em;
+  line-height: 1;
+  box-shadow: none;
+  border-radius: .1875em;
+}
+
+cloudflare-app[app="lead-box"] input[type="email"]:not(:focus) {
+  background: rgba(0, 0, 0, .02);
+}
+
+cloudflare-app[app="lead-box"] input[type="email"]:placeholder {
+  color: rgba(0, 0, 0, .5);
+}
+
+cloudflare-app[app="lead-box"].cf-invalid input[type='email'],
+cloudflare-app[app="lead-box"].cf-invalid input[type='email']:hover {
+  color: #f16975;
+  background: #fff6f7;
+  border-color: currentColor;
+  text-align: center;
+}
+
+cloudflare-app[app="lead-box"].cf-invalid input[type='email']:disabled::placeholder {
+  color: #b71927;
+  text-align: center;
+}
+
+cloudflare-app[app="lead-box"] input[type="email"]:focus {
+  outline: none;
+}
+
+cloudflare-app[app="lead-box"] form {
+  width: 100%;
+  margin: .5em 0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
