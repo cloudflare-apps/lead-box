@@ -20,6 +20,10 @@
       {
         "options": ["_default"],
         "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+      },
+      {
+        "options": ["_product"],
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
       }
     ]
   },
@@ -31,16 +35,19 @@
         "type": "string",
         "format": "radios",
         "enum": [
-          "signup",
+          "announcement",
           "cta",
-          "announcement"
+          "signup"
         ],
         "enumNames": {
-          "signup": "Gather emails to sign visitors up for your newsletter.",
-          "cta": "Redirect them to a special page.",
-          "announcement": "Just show a message."
+          "signup": "Gather emails to sign visitors up for your newsletter",
+          "cta": "Redirect them to a special page",
+          "announcement": "Just show a message"
         },
-        "default": "signup"
+        "enumProducts": {
+          "signup": ["pro"]
+        },
+        "default": "announcement"
       },
 
       "ctaTitle": {
@@ -268,6 +275,12 @@
           "right top": "Top right",
           "left bottom": "Bottom left",
           "right bottom": "Bottom right"
+        },
+        "enumProducts": {
+          "left top": ["pro"],
+          "right top": ["pro"],
+          "left bottom": ["pro"],
+          "right bottom": ["pro"]
         }
       },
 
@@ -287,6 +300,11 @@
           "0": "Immediately",
           "1500": "After a few seconds",
           "60000": "1 minute"
+        },
+        "enumProducts": {
+          "0": ["pro"],
+          "1500": ["pro"],
+          "60000": ["pro"]
         }
       }
     }

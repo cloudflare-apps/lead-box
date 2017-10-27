@@ -113,6 +113,8 @@ import * as logos from './logos'
     element.setAttribute('data-goal', options.goal)
     element.setAttribute('data-position', options.position)
 
+    console.log(INSTALL_PRODUCT)
+
     if (INSTALL_PRODUCT) {
       element.setAttribute('data-product-id', INSTALL_PRODUCT.id)
     }
