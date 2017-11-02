@@ -9,6 +9,7 @@ import * as logos from './logos'
 
   const isPreview = INSTALL_ID === 'preview'
   let options = INSTALL_OPTIONS
+  let product = INSTALL_PRODUCT
   let element
   const style = document.createElement('style')
 
@@ -113,15 +114,25 @@ import * as logos from './logos'
     element.setAttribute('data-goal', options.goal)
     element.setAttribute('data-position', options.position)
 
-    console.log(INSTALL_PRODUCT)
+    console.log(product)
 
-    if (INSTALL_PRODUCT) {
-      element.setAttribute('data-product-id', INSTALL_PRODUCT.id)
+    if (product) {
+      element.setAttribute('data-product-id', product.id)
     }
 
     element.style.zIndex = getMaxZIndex() + 1
 
     const children = renderers[options.goal](options)
+
+    function renderBranding () {
+      if (!product || product.id === 'basic') {
+        return `<a class="cf-branding" href="https://www.cloudflare.com/apps/" target="_blank">
+          ${logos.text}
+        </a>`
+      }
+
+      return ''
+    }
 
     element.innerHTML = `
       <cf-dialog>
@@ -131,9 +142,7 @@ import * as logos from './logos'
           <cf-dialog-content-text>
             ${children}
 
-            <a class="cf-branding" href="https://www.cloudflare.com/apps/" target="_blank">
-              ${logos.text}
-            </a>
+            ${renderBranding()}
           </cf-dialog-content-text>
         </cf-dialog-content>
       </cf-dialog>
@@ -191,6 +200,11 @@ import * as logos from './logos'
       options = nextOptions
 
       updateStyle()
+    },
+    setProduct (nextProduct) {
+      product = nextProduct
+
+      updateElement()
     }
   }
 }())

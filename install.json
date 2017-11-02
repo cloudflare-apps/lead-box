@@ -23,7 +23,7 @@
       },
       {
         "options": ["_product"],
-        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+        "execute": "INSTALL_SCOPE.setProduct(INSTALL_PRODUCT)"
       }
     ]
   },
@@ -44,7 +44,7 @@
           "cta": "Redirect them to a special page",
           "announcement": "Just show a message"
         },
-        "enumProducts": {
+        "products": {
           "signup": ["pro"]
         },
         "default": "announcement"
@@ -276,7 +276,7 @@
           "left bottom": "Bottom left",
           "right bottom": "Bottom right"
         },
-        "enumProducts": {
+        "products": {
           "left top": ["pro"],
           "right top": ["pro"],
           "left bottom": ["pro"],
@@ -301,7 +301,7 @@
           "1500": "After a few seconds",
           "60000": "1 minute"
         },
-        "enumProducts": {
+        "products": {
           "0": ["pro"],
           "1500": ["pro"],
           "60000": ["pro"]
