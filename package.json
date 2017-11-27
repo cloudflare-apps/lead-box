@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/CloudflareApps/LeadBox#readme",
   "dependencies": {
-    "@cloudflare-apps/email-utils": "github:CloudflareApps/email-utils#1.1.1"
+    "@cloudflare-apps/email-utils": "github:cloudflare-apps/email-utils#1.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
