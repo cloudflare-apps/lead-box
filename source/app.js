@@ -1,8 +1,8 @@
-import {submitConstantContact, submitFormspree, submitMailchimp} from '@cloudflare-apps/email-utils'
+import { submitConstantContact, submitFormspree, submitMailchimp } from '@cloudflare-apps/email-utils'
 import * as renderers from './renderers'
 import * as logos from './logos'
 
-(function () {
+;(function () {
   'use strict'
 
   if (!window.addEventListener) return // Check for IE9+
@@ -42,6 +42,8 @@ import * as logos from './logos'
     if (event && event.target !== this) return
 
     element.setAttribute('data-visibility', 'hidden')
+
+    window.localStorage.cfLeadBoxDimissed = JSON.stringify(options)
   }
 
   function show () {
@@ -114,8 +116,6 @@ import * as logos from './logos'
     element.setAttribute('data-goal', options.goal)
     element.setAttribute('data-position', options.position)
 
-    console.log(product)
-
     if (product) {
       element.setAttribute('data-product-id', product.id)
     }
@@ -178,8 +178,10 @@ import * as logos from './logos'
 
   function bootstrap () {
     const alreadyShown = window.localStorage.cfLeadBoxShown === JSON.stringify(options)
+    const dimissed = window.localStorage.cfLeadBoxDimissed === JSON.stringify(options)
 
-    if (alreadyShown && !isPreview) return
+    if (!isPreview && options.showStrategy === 'once' && alreadyShown) return
+    if (!isPreview && dimissed) return
 
     updateElement()
   }

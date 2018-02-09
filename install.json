@@ -306,12 +306,28 @@
           "1500": ["pro"],
           "60000": ["pro"]
         }
+      },
+
+      "showStrategy": {
+        "order": 22,
+        "title": "How often should the Lead Box appear?",
+        "type": "string",
+        "format": "radios",
+        "enum": [
+          "always",
+          "once"
+        ],
+        "enumNames": {
+          "always": "Until a visitor interacts with it",
+          "once": "Just once"
+        },
+        "default": "always"
       }
     }
   },
   "hooks": [
     {
-      "endpoint": "https://provisioner.appstore.cfdata.org/{{ install.options.account.service }}/hook",
+      "endpoint": "https://provisioner.appstore.cfdata.org/{{install.options.account.service}}/hook",
       "events": ["option-change:account", "preview"],
       "block": true,
       "if": "install.options.signupDestination == 'service' && install.options.account && install.options.account.service",
